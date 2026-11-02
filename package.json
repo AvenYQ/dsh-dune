@@ -1,0 +1,42 @@
+{
+  "name": "dsh-finch",
+  "version": "0.1.0",
+  "description": "Finch-inspired skin for DeepSeek Harness — geometric sans typeface, tight density, liquid glass and quiet motion tokens",
+  "type": "module",
+  "main": "lib/index.js",
+  "exports": {
+    ".": "./lib/index.js",
+    "./client": "./lib/client.js",
+    "./cordis.patch.yml": "./cordis.patch.yml",
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "lib/index.js",
+    "lib/client.js",
+    "fonts/outfit.b64.js",
+    "cordis.patch.yml",
+    "README.md",
+    "fonts/OFL.txt",
+    "LICENSE"
+  ],
+  "keywords": [
+    "dsh",
+    "dsh-plugin",
+    "deepseek-harness",
+    "skin",
+    "theme",
+    "finch",
+    "outfit",
+    "typography"
+  ],
+  "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    },
+    "client": {
+      "platform": "web",
+      "inject": []
+    }
+  },
+  "license": "MIT"
+}
