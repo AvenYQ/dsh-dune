@@ -1,5 +1,5 @@
 {
-  "name": "dsh-clay",
+  "name": "dsh-dune",
   "version": "0.1.0",
   "description": "Tactile skin for DeepSeek Harness — warm paper surfaces, tight typography, spring sidebar motion, per-workspace icon picker and AI-designed themes",
   "type": "module",
@@ -25,7 +25,7 @@
     "deepseek-harness",
     "skin",
     "theme",
-    "clay",
+    "dune",
     "typography"
   ],
   "dsh": {
