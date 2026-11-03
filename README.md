@@ -15,7 +15,7 @@
 设置 → **陶土** 里有三块内容：
 
 - **当前方案**：显示正在用的配色和色板，可一键恢复默认。
-- **预设方案**：原色、暖砂陶土、苔原、海盐、暮紫、琥珀，点一下立即生效，不用重启。
+- **预设方案**：原色、暖砂陶土、苔原、海盐、暮紫、琥珀、在路上，点一下立即生效，不用重启。
 - **让 AI 设计**：写一句想要的气氛（例如「雨后的灰绿，配一点旧铜色」），复制指令发给对话里的 AI，它会调用 `dsh_clay_design_theme` 生成并存下来。
 
 明暗跟随「通用」里的主题设置。强调色会派生气泡、发送按钮、链接、引用 chip、侧栏选中态、「深度求索中」那一行的颜色，所以换任何一套配色，界面各处都会一起变。
@@ -30,7 +30,9 @@
 
 每个槽给 `light` 与 `dark` 两个十六进制颜色，未提供的槽沿用默认值；`reset=true` 恢复默认。
 
-可用槽位：`bgBase`、`bgLayer1`、`bgLayer2`、`bgLayer3`、`bgOverlay`、`sidebar`、`textPrimary`、`textSecondary`、`textTertiary`、`textCaption`、`border1`、`border2`、`border3`、`border4`、`hover`、`accent`、`error`、`warning`、`success`、`idle`。
+可用槽位：`bgBase`、`bgLayer1`、`bgLayer2`、`bgLayer3`、`bgOverlay`、`sidebar`、`textPrimary`、`textSecondary`、`textTertiary`、`textCaption`、`border1`、`border2`、`border3`、`border4`、`hover`、`accent`、`link`、`error`、`warning`、`success`、`idle`。
+
+`link` 用来单独指定链接色（不给就跟随 `accent`）；`warning` 可以用来承载一个第三色，比如「在路上」里那条路牌的芥末黄。
 
 ## 工作区图标
 
