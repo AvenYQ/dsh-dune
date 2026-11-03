@@ -1,7 +1,7 @@
 {
-  "name": "dsh-finch",
+  "name": "dsh-clay",
   "version": "0.1.0",
-  "description": "Finch-inspired skin for DeepSeek Harness — geometric sans typeface, tight density, liquid glass and quiet motion tokens",
+  "description": "Tactile skin for DeepSeek Harness — warm paper surfaces, tight typography, spring sidebar motion, per-workspace icon picker and AI-designed themes",
   "type": "module",
   "main": "lib/index.js",
   "exports": {
@@ -25,8 +25,7 @@
     "deepseek-harness",
     "skin",
     "theme",
-    "finch",
-    "outfit",
+    "clay",
     "typography"
   ],
   "dsh": {

@@ -1,25 +1,49 @@
-# dsh-finch
+# dsh-clay
 
-独立的 Finch 风格皮肤。默认界面字体采用 Helvetica Neue 和系统中文字体，与本机 Finch 当前的字体设置一致；Outfit 字体仍随插件打包，供后续比较。颜色使用 DSH 主题 token，支持亮色和暗色。
+给 DeepSeek Harness 的暖色皮肤：米纸般的表面、克制的字号与字重、轻微回弹的侧栏动效，外加一套可自定义的工作区图标。
+
+配色不是写死的——内置五套方案，也可以用一句话让 AI 生成一套新的。
 
 ## 使用
 
-Finch 与 Quiet 是两个独立皮肤，应一次启用一个。独立的 dsh-reveal 插件负责流式文字效果。可让 AI 使用 `dsh_select_skin` 在两个皮肤之间切换；该工具先停用另一皮肤，再启用目标皮肤。也可通过插件管理器手动操作，先关当前皮肤再开另一个。
+与 `dsh-quiet` 是两个独立皮肤，同一时间只启用一个。流式文字的浮现效果由独立的 `dsh-reveal` 插件负责，两者互不依赖。
 
-## AI 设计主题
+可以让 AI 用 `dsh_select_skin` 在 `clay` 与 `quiet` 之间切换（先停用另一个再启用目标）。也可以在插件管理器里手动操作：先关掉当前皮肤，再打开另一个。
 
-让 AI 按描述创建或调整主题，调用 `dsh_finch_design_theme`。工具保存主题名称和颜色槽到 DSH 设置；每个颜色槽需要提供 light 和 dark 十六进制颜色。未指定的槽沿用默认值。设置发生变化时，客户端刷新当前配色。传 `reset=true` 恢复默认配色。
+## 外观设置
 
-可用颜色槽：`bgBase`、`bgLayer1`、`bgLayer2`、`bgLayer3`、`bgOverlay`、`sidebar`、`textPrimary`、`textSecondary`、`textTertiary`、`textCaption`、`border1`、`border2`、`border3`、`border4`、`hover`、`accent`、`error`、`warning`、`success`、`idle`。
+设置 → **陶土** 里有三块内容：
+
+- **当前方案**：显示正在用的配色和色板，可一键恢复默认。
+- **预设方案**：原色、暖砂陶土、苔原、海盐、暮紫、琥珀，点一下立即生效，不用重启。
+- **让 AI 设计**：写一句想要的气氛（例如「雨后的灰绿，配一点旧铜色」），复制指令发给对话里的 AI，它会调用 `dsh_clay_design_theme` 生成并存下来。
+
+明暗跟随「通用」里的主题设置。强调色会派生气泡、发送按钮、链接、引用 chip、侧栏选中态、「深度求索中」那一行的颜色，所以换任何一套配色，界面各处都会一起变。
+
+### AI 直接调用
+
+工具 `dsh_clay_design_theme` 接受一段 JSON：
+
+```json
+{"name":"暖砂陶土","colors":{"accent":{"light":"#A9603E","dark":"#D18C66"}}}
+```
+
+每个槽给 `light` 与 `dark` 两个十六进制颜色，未提供的槽沿用默认值；`reset=true` 恢复默认。
+
+可用槽位：`bgBase`、`bgLayer1`、`bgLayer2`、`bgLayer3`、`bgOverlay`、`sidebar`、`textPrimary`、`textSecondary`、`textTertiary`、`textCaption`、`border1`、`border2`、`border3`、`border4`、`hover`、`accent`、`error`、`warning`、`success`、`idle`。
 
 ## 工作区图标
 
-在侧栏把鼠标移到工作区行上，点右侧的 **`…`**，菜单里在「重命名」和「删除工作区」之间多出一条 **「图标 ›」**；指向它，右侧展开第二层面板——上面一排颜色（含"跟随主题"），下面 51 个 Phosphor 图标（MIT 许可）：21 个常用 + 30 个有趣，中间有分隔线，底部"恢复默认"。图标和颜色自由组合，选中即保存，无需重启。
+把鼠标移到侧栏的工作区行上，点右侧的 **`…`**，菜单里在「重命名」和「删除工作区」之间多出一条 **「图标 ›」**。指向它，右侧展开第二层面板：上面一排颜色（含「跟随主题」），下面 51 个 Phosphor 图标（21 个常用 + 30 个有趣），底部「恢复默认」。
 
-配置保存在 DSH 设置里（`workspaceIcons`），按工作区 ID 记录，因此重命名工作区不会丢失。文件夹类图标在展开时会自动切换为打开态，其他图标保持不变。
+选中即保存，按工作区 ID 记录，重命名工作区不会丢。文件夹类图标在行展开时会切换成打开态。
 
-也可以让 AI 代劳：工具 `dsh_finch_set_workspace_icon` 接受工作区名称、路径或 ID，配 `icon` 与 `color`；`reset=true` 清除该工作区的自定义外观。例如说“把「知识库」换成蓝色的地球图标”。
+也可以交给 AI：`dsh_clay_set_workspace_icon` 接受工作区名称、路径或 ID，配 `icon` 与 `color`，`reset=true` 清除。
 
 ## 维护
 
-字体、排版及默认色位于 `lib/client.js`；工具和可持久化配置位于 `lib/index.js`。Outfit 字体采用 SIL OFL，许可见 `fonts/OFL.txt`。
+- `lib/client.js`：配色、字体、侧栏动效、图标面板与设置页。
+- `lib/index.js`：可持久化配置与两个 AI 工具。
+- `fonts/`：Outfit 字体，SIL OFL 许可，见 `fonts/OFL.txt`。
+
+图标来自 [Phosphor Icons](https://phosphoricons.com/)（MIT）。字体为 Outfit（SIL OFL）。本项目以 MIT 许可发布。
