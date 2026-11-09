@@ -1,7 +1,7 @@
 {
   "name": "dsh-dune",
-  "version": "0.3.0",
-  "description": "Dune skin for DeepSeek Harness — warm paper surfaces, switchable text reveal, comet caret, material and typography toggles, per-workspace icons and AI-designed themes",
+  "version": "0.4.0",
+  "description": "Dune skin for DeepSeek Harness — warm paper surfaces, switchable text reveal, comet caret, material and typography toggles, per-workspace icons and AI-designed themes，侧栏入口拖动排序与收进「更多」",
   "type": "module",
   "main": "lib/index.js",
   "exports": {
