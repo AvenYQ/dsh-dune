@@ -6,6 +6,13 @@
 
 从 0.2 开始，两套文字动效也内置进来了：**逐字浮现**（原 `dsh-reveal`）和**彗星光标**（原 `dsh-smooth-cursor`）。它们和配色一样放在「设置 → Dune」里，开关即时生效，不需要装额外插件。
 
+## 0.5.0 更新
+
+- 接入 DS Bot（Bot 模式）：模型菜单里的推理等级位 `ds-bot.model.effort` 挂上同一条鲸鱼滑轨，拖动即改 Bot 自己的思考等级；Bot 的侧栏盖住原生底栏时，头像右侧 `ds-bot.sidebar.foot` 补上同一个日夜开关。没装 ds-bot 时两处都不注入，行为和以前一样。
+- 逐字浮现不再逐字打出卡片源码：别的插件在 `conversation.chat.markdown.fence` 注册过渲染器的代码块（```vellum 卡片这类）改走官方 `MarkdownText` 流式渲染，卡片跟着流式长出来，而不是先把 JSON 一个字一个字铺一遍。
+- 问答卡（ask_user_question 的回复气泡）的 `dt` / `dd` 不再写死主题灰，跟着气泡填充色走，accent 蓝气泡上也看得清。
+- 推理滑轨底部的「↶ Default」换成 SVG 重置箭头，不再受字体影响。
+
 ## 0.4.2 更新
 
 - 修「窗口拖不动、只能顶着最上端一条缝拖」：彗星光标那张铺满窗口的透明画布挂在 `body` 上，宿主的 `body > :not(#root) { -webkit-app-region: no-drag }` 会把它判成禁止拖动，于是整窗的拖拽区被这一层减掉；画布即使 `pointer-events:none` 也挡不住。
