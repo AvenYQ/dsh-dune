@@ -70,7 +70,12 @@ function Slider({ directory, state, reasoning }) {
     <div className="reference-rail" ref={track} role="slider" tabIndex={0} aria-label="推理等级" aria-valuemin={0} aria-valuemax={efforts.length - 1} aria-valuenow={selected} aria-valuetext={label} aria-disabled={!!state.pending} onPointerDown={start} onPointerMove={move} onPointerUp={finish} onPointerCancel={cancel} onLostPointerCapture={cancel} onKeyDown={key} style={{'--position': position}}>
       <div className="reference-band"><div className="reference-fill"/><canvas ref={band} aria-hidden="true"/></div>
       <div className="reference-travel" ref={travel}>{efforts.map((level, i) => <span className="reference-tick" key={level.id} style={{left: `${i / (efforts.length - 1) * 100}%`}}/>)}<span className="reference-knob"/></div><canvas className="reference-aura" ref={aura} aria-hidden="true"/>
-    </div><div className="reference-footer"><button type="button" disabled={!!state.pending} onClick={() => commit(Math.max(0, efforts.findIndex(x => x.id === reasoning.defaultEffort)), true)}>↶ Default</button></div>
+    </div><div className="reference-footer"><button type="button" disabled={!!state.pending} onClick={() => commit(Math.max(0, efforts.findIndex(x => x.id === reasoning.defaultEffort)), true)}>
+      <svg width={14} height={14} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.8} strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" focusable="false" style={{ display: 'block', flexShrink: 0 }}>
+        <path d="M3 10a9 9 0 1 1 2.6 8.4M3 4v6h6" />
+      </svg>
+      Default
+    </button></div>
     {error && <div role="alert">{error}</div>}</div></section>;
 }
 
@@ -116,5 +121,17 @@ export function ModelLabel({ provider, model, placement, directory }) {
   return <><span ref={anchor}>{model.badge ? `${model.badge} ` : ''}{model.name}</span>{supported && target && createPortal(<Slider directory={directory} state={state} reasoning={reasoning}/>, target)}</>;
 }
 export function installStyle() {
-  const node = document.createElement('style'); node.dataset.duneReasoningStyle = ''; node.textContent = styleText + '\n.dune-reasoning{width:300px;max-width:calc(100vw - 40px)}.dune-reasoning .reference-card{padding:14px 12px 12px;border:0;box-shadow:none;background:transparent}.dune-reasoning .reference-heading{font-size:14px;line-height:20px}.dune-reasoning .reference-directions{font-size:12px;line-height:16px;margin-top:12px}.dune-reasoning .reference-rail{margin-top:8px}.dune-reasoning .reference-footer{margin-top:10px}.dune-reasoning .reference-footer button{font-size:12px}.dune-reasoning .reference-rail:focus-visible{outline:2px solid #9a7de8;outline-offset:3px}'; document.head.appendChild(node); return () => node.remove();
+  const node = document.createElement('style'); node.dataset.duneReasoningStyle = ''; node.textContent = styleText + '\n.dune-reasoning{width:300px;max-width:calc(100vw - 40px)}.dune-bot-effort .dune-reasoning{width:auto;max-width:100%}.dune-reasoning .reference-card{padding:14px 12px 12px;border:0;box-shadow:none;background:transparent}.dune-reasoning .reference-heading{font-size:14px;line-height:20px}.dune-reasoning .reference-directions{font-size:12px;line-height:16px;margin-top:12px}.dune-reasoning .reference-rail{margin-top:8px}.dune-reasoning .reference-footer{margin-top:10px}.dune-reasoning .reference-footer button{font-size:12px}.dune-reasoning .reference-rail:focus-visible{outline:2px solid #9a7de8;outline-offset:3px}'; document.head.appendChild(node); return () => node.remove();
+}
+
+// DS Bot's model menu (Bot mode) fills its `ds-bot.model.effort` place with this: the same
+// slider, driven by the Bot's own thinking level instead of the shell's model directory.
+// `current` undefined is the model's default; a reset picks undefined again.
+export function BotEffort({ efforts, defaultEffort, current, onPick }) {
+  const pick = useRef(onPick);
+  pick.current = onPick;
+  const [directory] = useState(() => ({ select: async selection => { await pick.current?.(selection.reasoningEffort); return { ok: true }; } }));
+  if (!Array.isArray(efforts) || efforts.length < 2) return null;
+  const state = { current: { provider: 'ds-bot', model: 'bot', reasoningEffort: current }, pending: false };
+  return <div className="dune-bot-effort"><Slider directory={directory} state={state} reasoning={{ efforts, defaultEffort }}/></div>;
 }
