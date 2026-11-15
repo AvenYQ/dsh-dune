@@ -1,7 +1,7 @@
 {
   "name": "dsh-aven-dune",
-  "version": "0.5.2",
-  "description": "Dune skin for DeepSeek Harness — warm paper surfaces, switchable text reveal, comet caret, material and typography toggles, per-workspace icons and AI-designed themes，侧栏入口拖动排序与收进「更多」",
+  "version": "0.6.0",
+  "description": "Dune skin for DeepSeek Harness — warm paper surfaces, animated backdrops (Claude Code theme-examples), switchable text reveal, comet caret, material and typography toggles, per-workspace icons and AI-designed themes，侧栏入口拖动排序与收进「更多」",
   "type": "module",
   "main": "lib/index.js",
   "exports": {
@@ -17,7 +17,8 @@
     "cordis.patch.yml",
     "README.md",
     "fonts/OFL.txt",
-    "LICENSE"
+    "LICENSE",
+    "licenses/theme-examples-LICENSE"
   ],
   "keywords": [
     "dsh",
@@ -30,7 +31,9 @@
     "reveal",
     "cursor",
     "caret",
-    "effects"
+    "effects",
+    "backdrop",
+    "animated-background"
   ],
   "dsh": {
     "bundle": {

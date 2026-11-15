@@ -6,6 +6,16 @@
 
 从 0.2 开始，两套文字动效也内置进来了：**逐字浮现**（原 `dsh-reveal`）和**彗星光标**（原 `dsh-smooth-cursor`）。它们和配色一样放在「设置 → Dune」里，开关即时生效，不需要装额外插件。
 
+## 0.6.0 更新
+
+- **动态背景**：「设置 → Dune → 外观」新增一节「动态背景」，收录 Claude Code 官方主题包的 20 个场景（4 对日夜双版 + 12 套单版，共 16 个选项）：绘图纸潮汐、网点晨昏、抖动沙丘、剪纸花园、海龟泻湖、锦鲤池、夜礁、雪松林、盲文星空、方块云、矢量山脉、航班牌、蓝图、深水、极光、余烬。缩略图是活的，点一下立即生效。
+  - 和配色方案二选一：选了背景就用它自带的配色（16 套都过了对比度自检），「预设方案 / 我的方案」暂停；点任一方案会关掉背景。
+  - 双版跟着日夜开关换版本；只有一种的，选中后把日夜锁在它的模式上。
+  - 背景铺满整个窗口，中间文字列压一层「中间浓、四周淡」的遮罩，跟着侧栏展开 / 收起对准对话列；侧栏变成上浓下淡的轻磨砂（只糊 2.5px），开着侧栏也能看到后面的动画。
+  - 系统开了「减少动态」时，每个场景停在一帧构图完整的静止画面。
+  - 这些样式只在开着背景时生效，关掉背景完全回到原来的外观。
+- 让 AI 设计新主题时会顺手关掉动态背景，生成的配色立即可见。
+
 ## 0.5.2 更新
 
 - **AI 生成的主题不再互相覆盖**：设置里新增「我的方案」。每次让 AI 生成，新主题都会收进这里，同名的直接覆盖；之前生成过的都留着，点一下就能切回去，鼠标移到卡片上，右上角可以删除。从预设切走或者恢复默认，正在用的自定义主题也不会丢。0.5.1 及之前生成、正在用的那一套，升级后会自动放进「我的方案」。
@@ -183,3 +193,7 @@
 
 图标来自 [Phosphor Icons](https://phosphoricons.com/)（MIT）。字体为 Outfit（SIL OFL）。
 逐字浮现最初来自 [dsh-reveal](https://github.com/AvenYQ/dsh-reveal)；彗星光标移植自 [dsh-smooth-cursor](https://github.com/Lacquervii/smooth-cursor)（Lacquervii，MIT），其效果灵感来自 VSCode 的 smooth cursor 与 Obsidian 社区的 [animated-cursor](https://github.com/kotaindah55/animated-cursor)（Kotaindah55，MIT）。本项目以 MIT 许可发布。
+
+## 第三方代码
+
+动态背景的 20 个场景来自 [anthropics/claude-plugins-official](https://github.com/anthropics/claude-plugins-official) 的 `plugins/theme-examples`（提交 b5b01ac），按 Apache License 2.0 使用，原样编译进 `lib/client.js`，未改动场景本身。许可证原文见 `licenses/theme-examples-LICENSE`。
