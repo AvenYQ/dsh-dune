@@ -1,6 +1,6 @@
 {
   "name": "dsh-aven-dune",
-  "version": "0.6.0",
+  "version": "0.8.0",
   "description": "Dune skin for DeepSeek Harness — warm paper surfaces, animated backdrops (Claude Code theme-examples), switchable text reveal, comet caret, material and typography toggles, per-workspace icons and AI-designed themes，侧栏入口拖动排序与收进「更多」",
   "type": "module",
   "main": "lib/index.js",
@@ -44,9 +44,9 @@
       "inject": []
     }
   },
+  "license": "MIT",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/AvenYQ/dsh-dune.git"
-  },
-  "license": "MIT"
+  }
 }
